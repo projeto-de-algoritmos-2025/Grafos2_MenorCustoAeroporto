@@ -15,17 +15,17 @@ def run_data_processing():
     try:
         # 1. Processar dados brutos (aeroportos e rotas do Brasil)
         print("📊 Executando limpeza de dados (csv_cleaning_Brazil.py)...")
-        from csv_cleaning_Brazil import main as clean_data
+        from data_processing.csv_cleaning_Brazil import main as clean_data
         clean_data()
         
         # 2. Calcular distâncias entre aeroportos
         print("\n📏 Calculando distâncias entre aeroportos (haversine_dist_calc.py)...")
-        from haversine_dist_calc import add_distances_to_routes
+        from data_processing.haversine_dist_calc import add_distances_to_routes
         add_distances_to_routes()
         
         # 3. Verificar dados processados (opcional)
         print("\n✅ Verificando dados processados (check_brazil_data.py)...")
-        import check_brazil_data  # Este arquivo executa automaticamente ao ser importado
+        import data_processing.check_brazil_data  # Este arquivo executa automaticamente ao ser importado
         
         print("\n🎉 Processamento de dados concluído com sucesso!")
         print("=" * 70)
@@ -58,7 +58,7 @@ def main():
         sys.path.insert(0, backend_path)
         
         # Import and run the graph application
-        from graph import app, G
+        from backend.graph import app, G
         
         print("� Inicializando aplicação de visualização de aeroportos brasileiros...")
         print("=" * 70)
@@ -89,7 +89,9 @@ def main():
     except Exception as e:
         print(f"❌ Erro inesperado: {e}")
         print("💡 Verifique se todas as dependências estão instaladas:")
-        print("   pip install pandas networkx dash plotly")
+        print("   pip install -r requirements.txt")
+        print("   ou individualmente:")
+        print("   pip install pandas networkx dash plotly numpy")
         sys.exit(1)
 
 if __name__ == "__main__":
