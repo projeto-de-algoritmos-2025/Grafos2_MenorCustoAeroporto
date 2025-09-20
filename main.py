@@ -1,8 +1,58 @@
 import os
 import sys
 
+def run_data_processing():
+    """
+    Executa os scripts de processamento de dados na ordem correta
+    """
+    print("🔄 Iniciando processamento de dados...")
+    print("=" * 70)
+    
+    # Adicionar data_processing directory ao Python path
+    data_processing_path = os.path.join(os.path.dirname(__file__), 'data_processing')
+    sys.path.insert(0, data_processing_path)
+    
+    try:
+        # 1. Processar dados brutos (aeroportos e rotas do Brasil)
+        print("📊 Executando limpeza de dados (csv_cleaning_Brazil.py)...")
+        from csv_cleaning_Brazil import main as clean_data
+        clean_data()
+        
+        # 2. Calcular distâncias entre aeroportos
+        print("\n📏 Calculando distâncias entre aeroportos (haversine_dist_calc.py)...")
+        from haversine_dist_calc import add_distances_to_routes
+        add_distances_to_routes()
+        
+        # 3. Verificar dados processados (opcional)
+        print("\n✅ Verificando dados processados (check_brazil_data.py)...")
+        import check_brazil_data  # Este arquivo executa automaticamente ao ser importado
+        
+        print("\n🎉 Processamento de dados concluído com sucesso!")
+        print("=" * 70)
+        
+    except Exception as e:
+        print(f"❌ Erro durante o processamento de dados: {e}")
+        raise
+
+def check_processed_data_exists():
+    """
+    Verifica se os arquivos de dados processados já existem
+    """
+    data_dir = os.path.join(os.path.dirname(__file__), 'data')
+    airports_file = os.path.join(data_dir, 'airports_min.csv')
+    routes_file = os.path.join(data_dir, 'routes_min.csv')
+    
+    return os.path.exists(airports_file) and os.path.exists(routes_file)
+
 def main():
     try:
+        # Verificar se os dados processados já existem
+        if not check_processed_data_exists():
+            print("📋 Dados processados não encontrados. Executando processamento...")
+            run_data_processing()
+        else:
+            print("✅ Dados processados já existem. Pulando processamento...")
+        
         # Add backend directory to Python path
         backend_path = os.path.join(os.path.dirname(__file__), 'backend')
         sys.path.insert(0, backend_path)
@@ -32,7 +82,8 @@ def main():
         
     except FileNotFoundError as e:
         print(f"❌ Arquivo de dados não encontrado: {e}")
-        print("💡 Execute primeiro o script data_processing/csv_cleaning_Brazil.py")
+        print("💡 Verifique se os arquivos de dados brutos (airports.dat, routes.dat) existem na pasta data/")
+        print("💡 Ou execute novamente para tentar o processamento automático dos dados")
         sys.exit(1)
         
     except Exception as e:
