@@ -1,8 +1,8 @@
 import pandas as pd
 
 # Carrega e verifica os dados processados
-routes = pd.read_csv('../data/routes_min.csv')
-airports = pd.read_csv('../data/airports_min.csv')
+routes = pd.read_csv('data/routes_min.csv')
+airports = pd.read_csv('data/airports_min.csv')
 
 print("=== DADOS PROCESSADOS PARA O BRASIL ===")
 print(f"✓ Total de aeroportos brasileiros: {len(airports)}")

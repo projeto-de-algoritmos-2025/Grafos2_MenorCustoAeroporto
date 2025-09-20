@@ -32,8 +32,8 @@ def add_distances_to_routes():
     Adiciona coluna de distância ao arquivo routes_min.csv
     """
     # Caminhos dos arquivos
-    airports_file = os.path.join("..", "data", "airports_min.csv")
-    routes_file = os.path.join("..", "data", "routes_min.csv")
+    airports_file = os.path.join("data", "airports_min.csv")
+    routes_file = os.path.join("data", "routes_min.csv")
     
     # Verifica se os arquivos existem
     if not os.path.exists(airports_file):
