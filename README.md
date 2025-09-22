@@ -7,4 +7,4 @@ Este projeto utiliza um dataset de aeroportos e suas conexões para a aplicaçã
 - Caio Ferreira Duarte - 231026901
 - Victor Pontual Guedes Arruda Nobrega - 211029601
 
-## Gravação da apresentação: https://youtu.be/ZNg9JDm8L6k
+## Gravação da apresentação: https://youtu.be/yI_kjr9UTKI
