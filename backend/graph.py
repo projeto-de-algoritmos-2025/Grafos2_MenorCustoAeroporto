@@ -112,6 +112,8 @@ def dijkstra_shortest_path(graph, source, target):
         total += w
         print(f"Aresta: {graph.nodes[u]['name']} -> {graph.nodes[v]['name']} | Custo: {w} km")
     print(f"Custo total: {total:.2f} km\n")
+    
+    return path, total
 
 # Algoritmo de Kruskal - Árvore Geradora Mínima
 def kruskal_mst_path(graph, source, target):

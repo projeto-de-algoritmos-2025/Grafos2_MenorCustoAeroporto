@@ -176,8 +176,6 @@ def update_graph(source, target, algorithm):
             f"Algoritmo: Kruskal (Árvore Geradora Mínima)\n"
             f"Peso total da MST: {mst_weight:.2f} km\n"
             f"Número total de arestas na MST: {len(mst_graph.edges())}\n"
-            f"A MST conecta todos os aeroportos com o menor custo total possível.\n"
-            f"Esta árvore é única e independe da escolha de origem."
         )
         path = []
         fig = plot_geo_graph(G, path, algorithm, mst_graph)
